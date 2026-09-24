@@ -1,0 +1,6 @@
+{
+  "name": "Nitish Tiffin Service",
+  "description": "Fresh, simple and home-cooked meals prepared with the same care and quality we serve our own family in Chamba, Himachal Pradesh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
