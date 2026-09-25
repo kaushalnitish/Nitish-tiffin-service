@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageCircle, Check } from 'lucide-react';
-import { BUSINESS, IMAGES, CONTACTS } from '../config/siteContent';
+import { BUSINESS, CONTACTS } from '../config/siteContent';
+import { TIFFIN_MEAL_IMAGE } from '../config/images';
 
 interface TodaysMenuSectionProps {
   onOrderMenu?: (mealType?: string) => void;
@@ -80,12 +81,29 @@ export const TodaysMenuSection: React.FC<TodaysMenuSectionProps> = ({ onOrderMen
             <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[380px] group">
               {/* Soft organic image container */}
               <div className="relative rounded-[26px] sm:rounded-[30px] overflow-hidden aspect-4/3 sm:aspect-5/4 shadow-sm border border-[#E4DFD2] bg-[#EAE7DC]">
-                <img
-                  src={IMAGES.todaysMeal}
-                  alt="Real stainless-steel tiffin with fresh home-cooked meal and market vegetables"
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                  loading="lazy"
-                />
+                <picture className="w-full h-full block">
+                  <source
+                    type="image/avif"
+                    srcSet={TIFFIN_MEAL_IMAGE.avifSrcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet={TIFFIN_MEAL_IMAGE.webpSrcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                  />
+                  <img
+                    src={TIFFIN_MEAL_IMAGE.fallbackSrc}
+                    srcSet={TIFFIN_MEAL_IMAGE.fallbackSrcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                    width={TIFFIN_MEAL_IMAGE.width}
+                    height={TIFFIN_MEAL_IMAGE.height}
+                    alt="Real stainless-steel tiffin with fresh home-cooked meal and market vegetables"
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
 
                 {/* Subtle, natural editorial handwritten/italic script note */}
                 <div className="absolute top-3.5 right-3.5 pointer-events-none">

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ABOUT, IMAGES } from '../config/siteContent';
+import { ABOUT } from '../config/siteContent';
+import { KITCHEN_COOKING_IMAGE } from '../config/images';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -9,12 +10,29 @@ export const AboutSection: React.FC = () => {
           {/* Image */}
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="relative rounded-3xl overflow-hidden aspect-4/3 sm:aspect-5/4 border border-[#E3DFD2] shadow-sm bg-[#EAE8DE] group">
-              <img
-                src={IMAGES.about}
-                alt="Authentic Indian home cooking with fresh rotis and traditional spices"
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
+              <picture className="w-full h-full block">
+                <source
+                  type="image/avif"
+                  srcSet={KITCHEN_COOKING_IMAGE.avifSrcSet}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                />
+                <source
+                  type="image/webp"
+                  srcSet={KITCHEN_COOKING_IMAGE.webpSrcSet}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                />
+                <img
+                  src={KITCHEN_COOKING_IMAGE.fallbackSrc}
+                  srcSet={KITCHEN_COOKING_IMAGE.fallbackSrcSet}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                  width={KITCHEN_COOKING_IMAGE.width}
+                  height={KITCHEN_COOKING_IMAGE.height}
+                  alt="Authentic Indian home cooking with fresh rotis and traditional spices"
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               {/* Subtle genuine note */}
               <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-xs rounded-xl p-2.5 border border-white/80 flex items-center justify-between text-xs text-[#183824]">
                 <span className="font-semibold">Ghar Jaisa Khana</span>

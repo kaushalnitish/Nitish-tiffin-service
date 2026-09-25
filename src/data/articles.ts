@@ -33,12 +33,12 @@ export interface Article {
 export const PUBLIC_ARTICLE_AUTHOR = "Posted by Admin";
 export const getPublicArticleAuthor = (_article?: Article | null): string => "Posted by Admin";
 
-const STORAGE_KEY = "nitish_tiffin_articles_v4";
+const STORAGE_KEY = "nitish_tiffin_articles_v5";
 
 const INITIAL_ARTICLES: Article[] = [
   {
     id: "art-1",
-    slug: "why-home-cooked-food-matters-in-chamba",
+    slug: "why-simple-home-cooked-food-matters-for-working-days-in-chamba",
     title: "Why Simple Home-Cooked Food Matters for Working Days in Chamba",
     excerpt:
       "Eating out daily at dhabas or restaurants in Chamba quickly gets heavy on digestion and the wallet. Here is why simple, light ghar ka khana sustains energy throughout a long workday.",
@@ -78,7 +78,7 @@ If you are currently staying in Chamba and looking for a regular lunch or dinner
     seoTitle: "Why Simple Home-Cooked Food Matters for Working Days in Chamba",
     seoDescription:
       "Discover why simple ghar ka khana in Chamba beats everyday oily restaurant food for health, steady energy, and long workdays.",
-    canonicalUrl: "https://nitishtiffinservice.com/articles/why-home-cooked-food-matters-in-chamba",
+    canonicalUrl: "https://nitishtiffinservice.com/articles/why-simple-home-cooked-food-matters-for-working-days-in-chamba",
     readingTime: "4 min read",
     isPublished: true,
   },
@@ -108,7 +108,9 @@ export function getPublishedArticles(): Article[] {
 }
 
 export function getArticleBySlug(slug: string): Article | undefined {
-  return getArticles().find((a) => a.slug === slug);
+  return getArticles().find(
+    (a) => a.slug === slug || (slug === "why-home-cooked-food-matters-in-chamba" && a.id === "art-1")
+  );
 }
 
 export function saveArticle(article: Article): void {

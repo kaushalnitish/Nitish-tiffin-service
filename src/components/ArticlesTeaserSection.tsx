@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, Clock, Calendar } from 'lucide-react';
-import { getPublishedArticles, PUBLIC_ARTICLE_AUTHOR } from '../data/articles';
+import { ArrowRight, Clock } from 'lucide-react';
+import { getArticleBySlug, getPublishedArticles, PUBLIC_ARTICLE_AUTHOR } from '../data/articles';
+import { getOptimizedImage } from '../config/images';
 
 export const ArticlesTeaserSection: React.FC = () => {
-  const articles = getPublishedArticles();
-  const article = articles[0];
+  const TARGET_SLUG = 'why-simple-home-cooked-food-matters-for-working-days-in-chamba';
+  const article = getArticleBySlug(TARGET_SLUG) || getPublishedArticles()[0];
 
   if (!article) return null;
+
+  const optImage = getOptimizedImage(article.featuredImage);
 
   return (
     <section className="py-14 sm:py-20 bg-[#FAF9F5] border-t border-[#EAE7DC]">
@@ -39,12 +42,29 @@ export const ArticlesTeaserSection: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <article className="rounded-3xl bg-white border border-[#E3DFD2] overflow-hidden shadow-2xs grid grid-cols-1 md:grid-cols-12 group hover:border-[#183824]/40 transition-all">
             <div className="md:col-span-5 aspect-16/10 md:aspect-auto overflow-hidden bg-[#EAE8DE]">
-              <img
-                src={article.featuredImage}
-                alt={article.title}
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                loading="lazy"
-              />
+              <picture className="w-full h-full block">
+                <source
+                  type="image/avif"
+                  srcSet={optImage.avifSrcSet}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 420px"
+                />
+                <source
+                  type="image/webp"
+                  srcSet={optImage.webpSrcSet}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 420px"
+                />
+                <img
+                  src={optImage.fallbackSrc}
+                  srcSet={optImage.fallbackSrcSet}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 420px"
+                  width={optImage.width}
+                  height={optImage.height}
+                  alt={article.title}
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
 
             <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between">

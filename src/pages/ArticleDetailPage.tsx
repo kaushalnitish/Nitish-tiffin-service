@@ -4,6 +4,7 @@ import { Clock, Calendar, User, ArrowLeft, MessageCircle, Phone, MapPin, Share2 
 import { SEOHead } from '../components/SEOHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { getArticleBySlug, PUBLIC_ARTICLE_AUTHOR } from '../data/articles';
+import { getOptimizedImage } from '../config/images';
 import { CONTACTS, BUSINESS } from '../config/siteContent';
 
 export const ArticleDetailPage: React.FC = () => {

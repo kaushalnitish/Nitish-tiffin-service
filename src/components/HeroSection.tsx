@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageCircle, Clock, MapPin, ArrowRight } from 'lucide-react';
-import { BUSINESS, IMAGES } from '../config/siteContent';
+import { BUSINESS } from '../config/siteContent';
+import { HERO_MASCOT_IMAGE } from '../config/images';
 
 interface HeroSectionProps {
   onOrderTiffin: () => void;
@@ -93,13 +94,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Subtle warm ambient glow behind the circular badge */}
             <div className="absolute inset-6 rounded-full bg-amber-500/10 blur-2xl -z-10 group-hover:bg-amber-500/15 transition-all duration-500" />
 
-            <img
-              src={IMAGES.hero}
-              alt="Nitish Tiffin Service Mascot and Home-Style Thali in Chamba"
-              className="w-full h-auto max-h-[380px] sm:max-h-[440px] object-contain drop-shadow-md group-hover:scale-102 transition-transform duration-500 select-none"
-              loading="eager"
-              referrerPolicy="no-referrer"
-            />
+            <picture className="w-full h-auto max-h-[380px] sm:max-h-[440px] flex items-center justify-center">
+              <source
+                type="image/avif"
+                srcSet={HERO_MASCOT_IMAGE.avifSrcSet}
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 400px, 440px"
+              />
+              <source
+                type="image/webp"
+                srcSet={HERO_MASCOT_IMAGE.webpSrcSet}
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 400px, 440px"
+              />
+              <img
+                src={HERO_MASCOT_IMAGE.fallbackSrc}
+                srcSet={HERO_MASCOT_IMAGE.fallbackSrcSet}
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 400px, 440px"
+                width={440}
+                height={440}
+                alt="Nitish Tiffin Service Mascot and Home-Style Thali in Chamba"
+                className="w-full h-auto max-h-[380px] sm:max-h-[440px] object-contain drop-shadow-md group-hover:scale-102 transition-transform duration-500 select-none"
+                loading="eager"
+                fetchPriority="high"
+                decoding="sync"
+                referrerPolicy="no-referrer"
+              />
+            </picture>
           </div>
         </div>
       </div>

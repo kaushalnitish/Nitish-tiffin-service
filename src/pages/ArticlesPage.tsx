@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Clock, Calendar, ArrowRight, Search, Sparkles } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { getPublishedArticles, Article, PUBLIC_ARTICLE_AUTHOR } from '../data/articles';
+import { getArticleBySlug, PUBLIC_ARTICLE_AUTHOR } from '../data/articles';
+import { getOptimizedImage } from '../config/images';
 import { OrderSection } from '../components/OrderSection';
 
 export const ArticlesPage: React.FC = () => {
-  const articles = getPublishedArticles();
-  const article = articles[0];
+  const TARGET_SLUG = 'why-simple-home-cooked-food-matters-for-working-days-in-chamba';
+  const article = getArticleBySlug(TARGET_SLUG);
+  const optImage = article ? getOptimizedImage(article.featuredImage) : null;
 
   const collectionSchema = {
     '@context': 'https://schema.org',
@@ -49,12 +51,32 @@ export const ArticlesPage: React.FC = () => {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
             <article className="rounded-3xl bg-white border border-[#E3DFD2] overflow-hidden shadow-2xs grid grid-cols-1 lg:grid-cols-12 group hover:border-[#183824]/40 transition-all">
               <div className="lg:col-span-6 aspect-16/10 lg:aspect-auto overflow-hidden bg-[#EAE8DE]">
-                <img
-                  src={article.featuredImage}
-                  alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                  loading="eager"
-                />
+                {optImage && (
+                  <picture className="w-full h-full block">
+                    <source
+                      type="image/avif"
+                      srcSet={optImage.avifSrcSet}
+                      sizes="(max-width: 1024px) 100vw, 500px"
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet={optImage.webpSrcSet}
+                      sizes="(max-width: 1024px) 100vw, 500px"
+                    />
+                    <img
+                      src={optImage.fallbackSrc}
+                      srcSet={optImage.fallbackSrcSet}
+                      sizes="(max-width: 1024px) 100vw, 500px"
+                      width={optImage.width}
+                      height={optImage.height}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="sync"
+                    />
+                  </picture>
+                )}
               </div>
 
               <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
