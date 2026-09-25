@@ -26,20 +26,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="lg:col-span-7 space-y-6">
           <div className="space-y-3">
             <span className="text-xs font-bold text-[#55695A] uppercase tracking-wider block">
-              HOME-COOKED MEALS
+              HOME-COOKED MEALS • CHAMBA, HP
             </span>
 
+            {/* Exactly one meaningful H1 for the page */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#183824] leading-[1.08]">
-              Simple Food.
+              Home-Cooked Tiffin
               <br />
               <span className="font-normal text-[#2A4C36] italic">
-                Like We Eat at Home.
+                Service in Chamba
               </span>
             </h1>
           </div>
 
+          {/* Natural, informative introductory paragraph */}
           <p className="text-base sm:text-lg text-[#4E5E52] leading-relaxed max-w-xl">
-            {BUSINESS.subtext}
+            Nitish Tiffin Service delivers simple, honest home-cooked food across Chamba. Prepared with the same care and fresh market ingredients that our own family eats, we provide daily lunch around 1:00 PM and warm dinner by around 7:45 PM.
           </p>
 
           {/* Quick Info Strip */}
@@ -85,20 +87,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </p>
         </div>
 
-        {/* Right Column: Clean Photographic Visual */}
-        <div className="lg:col-span-5">
-          <div className="relative rounded-3xl overflow-hidden aspect-4/3 sm:aspect-5/4 border border-[#E3DFD2] bg-[#EAE8DE] shadow-xs group">
+        {/* Right Column: Nitish Tiffin Service Mascot Logo */}
+        <div className="lg:col-span-5 flex items-center justify-center">
+          <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] flex items-center justify-center p-1 sm:p-3 group">
+            {/* Subtle warm ambient glow behind the circular badge */}
+            <div className="absolute inset-6 rounded-full bg-amber-500/10 blur-2xl -z-10 group-hover:bg-amber-500/15 transition-all duration-500" />
+
             <img
               src={IMAGES.hero}
-              alt="Fresh home-cooked meal plate"
-              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+              alt="Nitish Tiffin Service Mascot and Home-Style Thali in Chamba"
+              className="w-full h-auto max-h-[380px] sm:max-h-[440px] object-contain drop-shadow-md group-hover:scale-102 transition-transform duration-500 select-none"
               loading="eager"
+              referrerPolicy="no-referrer"
             />
-            {/* Minimal Corner Note */}
-            <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-xs rounded-xl p-2.5 border border-white/80 flex items-center justify-between text-xs text-[#183824]">
-              <span className="font-semibold">Cooked fresh twice daily</span>
-              <span className="text-[#657669]">Chamba, HP</span>
-            </div>
           </div>
         </div>
       </div>

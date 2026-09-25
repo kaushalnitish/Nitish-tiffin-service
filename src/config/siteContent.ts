@@ -85,7 +85,7 @@ export const ABOUT = {
 };
 
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+  hero: "/nitish_tiffin_mascot_logo.png",
   about: indianKitchenPhoto,
   todaysMeal: tiffinMealPhoto,
 };
